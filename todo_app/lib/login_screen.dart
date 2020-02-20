@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/constants.dart';
+import 'package:todo_app/components/rounded_button.dart';
+import 'package:todo_app/todo_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+
+  static const String id = 'login_screen';
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Login"),
+      ),
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -35,24 +44,21 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 24,
               ),
-              Padding(
-                padding:  EdgeInsets.symmetric(vertical: 16),
-                child: Material(
-                  elevation: 1,
-                  color: Colors.blueGrey,
-                  borderRadius: BorderRadius.circular(32.0),
-                  child: MaterialButton(
-                    minWidth: 200,
-                    height: 42,
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                        color: Colors.white
-                      ),
-                    ),
-                  ),
+              RoundedButton(
+                title: "login",
+                color: Colors.blueGrey,
+                onPressed: () {
+                  final snackBar= SnackBar(
+                    content: Text("Hellow"),
+                   action: SnackBarAction(
+                     label: "Undo",
+                      onPressed: ()=> print("Undo"),
+                   ),
+                  );
+                  Scaffold.of(RoundedButton.buildContext).showSnackBar(snackBar);
 
-                ),
+                  Navigator.pushNamed(context, TodoScreen.id);
+                },
               )
             ],
           ),
