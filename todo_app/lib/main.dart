@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      initialRoute: LoginScreen.id,
+      initialRoute: TodoScreen.id,
       routes: {
         TodoScreen.id:(context)=>TodoScreen(),
         LoginScreen.id:(context)=>LoginScreen()
