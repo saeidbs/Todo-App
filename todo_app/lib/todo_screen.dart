@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/add_task_screen.dart';
+import 'package:todo_app/widget/TaskList.dart';
 
 
 class TodoScreen extends StatefulWidget {
@@ -12,6 +14,22 @@ class _TodoScreenState extends State<TodoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.lightBlueAccent,
+        child: Icon(Icons.add),
+        onPressed: (){
+          showModalBottomSheet(context: context,
+          builder: (context)=>SingleChildScrollView(
+          child: Container(
+          color: Colors.orangeAccent,
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: AddTaskScreen(),
+          ),
+          )
+
+          );
+        },
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -62,6 +80,7 @@ class _TodoScreenState extends State<TodoScreen> {
               topRight: Radius.circular(20.0)
             )
             ),
+            child: TaskList(),
           ),
         )
       ],),
