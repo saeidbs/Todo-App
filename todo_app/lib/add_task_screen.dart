@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/dataBase/dataManager/DataManager.dart';
+import 'package:todo_app/utility/Values.dart';
 
 
-class AddTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatefulWidget {
+  @override
+  _AddTaskScreenState createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  String newTaskTitle;
   @override
   Widget build(BuildContext context) {
-    String newTaskTitle;
 
     return Container(
       color: Color(0xff757575),
@@ -13,7 +20,7 @@ class AddTaskScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.0),
+            topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
           ),
         ),
@@ -33,6 +40,7 @@ class AddTaskScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               onChanged: (newText) {
                 newTaskTitle = newText;
+                print("1$newTaskTitle");
               },
             ),
             FlatButton(
@@ -43,8 +51,13 @@ class AddTaskScreen extends StatelessWidget {
                 ),
               ),
               color: Colors.lightBlueAccent,
-              onPressed: () {
+              onPressed: () async {
                 //Provider.of<TaskData>(context).addTask(newTaskTitle);
+                print("akharin chiz $newTaskTitle");
+                await Values.dataManager.getTodoDAO().add(newTaskTitle);
+                print("ridi");
+                  print(await Values.dataManager.getTodoDAO().queryAllRows());
+
                 Navigator.pop(context);
               },
             ),
@@ -54,3 +67,5 @@ class AddTaskScreen extends StatelessWidget {
     );
   }
 }
+
+

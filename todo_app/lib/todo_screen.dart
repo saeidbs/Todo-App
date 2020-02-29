@@ -1,15 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/add_task_screen.dart';
+import 'package:todo_app/dataBase/dataManager/DataManager.dart';
+import 'package:todo_app/utility/Values.dart';
 import 'package:todo_app/widget/TaskList.dart';
+import 'package:todo_app/dataBase/DatabaseHelper.dart';
+
+import 'dataBase/dataHelper/tables/TodoTable.dart';
 
 
 class TodoScreen extends StatefulWidget {
   static const String id = 'todo_screen';
+  List<ListTile> listTile=[
+    ListTile(
+      title: Text("task 1"),
+    onTap:()=> print(TodoTable.getCreateTableString()),)
+
+  ];
+
+
   @override
   _TodoScreenState createState() => _TodoScreenState();
+
+
 }
 
 class _TodoScreenState extends State<TodoScreen> {
+@override
+   void initState()  {
+    super.initState();
+    updatelist();
+
+  }
+
+
+
+
+  void updatelist() async {
+
+    List<ListTile> test=await Values.dataManager.getTodoDAO().queryAllRows();
+    setState(()  {
+      widget.listTile=test;
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,10 +51,11 @@ class _TodoScreenState extends State<TodoScreen> {
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
         onPressed: (){
-          showModalBottomSheet(context: context,
+          showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
           builder: (context)=>SingleChildScrollView(
           child: Container(
-          color: Colors.orangeAccent,
             padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
             child: AddTaskScreen(),
           ),
@@ -80,7 +114,7 @@ class _TodoScreenState extends State<TodoScreen> {
               topRight: Radius.circular(20.0)
             )
             ),
-            child: TaskList(),
+            child: TaskList(list:  widget.listTile,),
           ),
         )
       ],),
