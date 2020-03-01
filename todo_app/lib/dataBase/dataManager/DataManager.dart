@@ -11,11 +11,11 @@ class DataManager{
 
   Database _db;
 
-   DataManager()   {
+  DataManager()   {
 //    DataBaseHandler dataBaseHandler=DataBaseHandler();
 //    _db= await dataBaseHandler.database;
 //    _initial();
-   saeid();
+    saeid();
   }
 
   saeid() async {
@@ -30,11 +30,11 @@ class DataManager{
 
   }
 
-TodoDAO getTodoDAO()=>_todoDAO;
+  TodoDAO getTodoDAO()=>_todoDAO;
 
-   static DataManager createDateManager() {
+  static DataManager createDateManager() {
     if (_dataManger == null)
-     _dataManger = DataManager();
+      _dataManger = DataManager();
 
 
     return _dataManger;

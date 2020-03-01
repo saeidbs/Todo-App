@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/dataBase/dataManager/DataManager.dart';
 import 'package:todo_app/utility/Values.dart';
 import 'login_screen.dart';
 import 'todo_screen.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      initialRoute: TodoScreen.id,
+      initialRoute: LoginScreen.id,
       routes: {
         TodoScreen.id:(context)=>TodoScreen(),
         LoginScreen.id:(context)=>LoginScreen()

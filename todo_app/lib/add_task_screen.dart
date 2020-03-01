@@ -4,6 +4,7 @@ import 'package:todo_app/utility/Values.dart';
 
 
 class AddTaskScreen extends StatefulWidget {
+
   @override
   _AddTaskScreenState createState() => _AddTaskScreenState();
 }
@@ -58,7 +59,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 print("ridi");
                   print(await Values.dataManager.getTodoDAO().queryAllRows());
 
+
+
+
+
+
                 Navigator.pop(context);
+
               },
             ),
           ],

@@ -3,15 +3,27 @@ import 'package:todo_app/constants.dart';
 import 'package:todo_app/components/rounded_button.dart';
 import 'package:todo_app/todo_screen.dart';
 
+import 'dataBase/dataManager/DataManager.dart';
+
 class LoginScreen extends StatefulWidget {
 
   static const String id = 'login_screen';
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
+
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    test();
+  }
+  Future test() async {
+    var test= await DataManager.createDateManager();
+  }
 
   @override
   Widget build(BuildContext context) {

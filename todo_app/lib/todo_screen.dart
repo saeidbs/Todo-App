@@ -38,11 +38,14 @@ class _TodoScreenState extends State<TodoScreen> {
   void updatelist() async {
 
     List<ListTile> test=await Values.dataManager.getTodoDAO().queryAllRows();
+    print("masoud");
     setState(()  {
       widget.listTile=test;
     });
 
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,8 +63,9 @@ class _TodoScreenState extends State<TodoScreen> {
             child: AddTaskScreen(),
           ),
           )
-
-          );
+          ).whenComplete((){
+            updatelist();
+          });
         },
       ),
       body: Column(

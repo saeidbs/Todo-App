@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:todo_app/dataBase/dataHelper/tables/TodoTable.dart';
+import 'package:todo_app/dataBase/dataManager/DataManager.dart';
 
 class TodoDAO{
-  final Database DB;
+   Database DB;
   TodoDAO({this.DB});
 
 
   Future<int> add(String string) async{
+//    DB=await DataManager.dataManger.database;
 Map<String,String> map={
 TodoTable.TEXT_COLUMN:string
 };
@@ -19,6 +21,7 @@ dynamic getTodo(){
   
 }
   Future<List<ListTile>> queryAllRows()  async {
+//    DB=await DataManager.dataManger.database;
 
     List<Map<String, dynamic>> list= await DB.query(TodoTable.TABLE_NAME);
 
