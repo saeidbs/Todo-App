@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/dataBase/dataManager/DataManager.dart';
-import 'package:todo_app/utility/Values.dart';
+import 'package:todo_app/utility/Val.dart';
+
+import 'models/TaskData.dart';
 
 
 class AddTaskScreen extends StatefulWidget {
@@ -55,9 +58,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               onPressed: () async {
                 //Provider.of<TaskData>(context).addTask(newTaskTitle);
                 print("akharin chiz $newTaskTitle");
-                await Values.dataManager.getTodoDAO().add(newTaskTitle);
-                print("ridi");
-                  print(await Values.dataManager.getTodoDAO().queryAllRows());
+                await  Provider.of<TaskData>(context).addTask(newTaskTitle);
+               // await  Provider.of<Val>(context).taskData.addTask(newTaskTitle);
+//                  await Values.dataManager.getTodoDAO().add(newTaskTitle);
+//                print("ridi");
+//                  print(await Values.dataManager.getTodoDAO().queryAllRows());
 
 
 

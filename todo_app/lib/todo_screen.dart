@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/add_task_screen.dart';
 import 'package:todo_app/dataBase/dataManager/DataManager.dart';
+import 'package:todo_app/models/Task.dart';
+import 'package:todo_app/utility/Val.dart';
 import 'package:todo_app/utility/Values.dart';
 import 'package:todo_app/widget/TaskList.dart';
 import 'package:todo_app/dataBase/DatabaseHelper.dart';
 
 import 'dataBase/dataHelper/tables/TodoTable.dart';
+import 'models/TaskData.dart';
 
 
 class TodoScreen extends StatefulWidget {
   static const String id = 'todo_screen';
-  List<ListTile> listTile=[
-    ListTile(
-      title: Text("task 1"),
-    onTap:()=> print(TodoTable.getCreateTableString()),)
 
-  ];
+  //String countOfTodos="5";
+//  List<ListTile> listTile=[
+//    ListTile(
+//      title: Text("task 1"),
+//    onTap:()=> print(TodoTable.getCreateTableString()),)
+//
+//  ];
 
 
   @override
@@ -28,7 +34,7 @@ class _TodoScreenState extends State<TodoScreen> {
 @override
    void initState()  {
     super.initState();
-    updatelist();
+   updatelist();
 
   }
 
@@ -37,11 +43,21 @@ class _TodoScreenState extends State<TodoScreen> {
 
   void updatelist() async {
 
-    List<ListTile> test=await Values.dataManager.getTodoDAO().queryAllRows();
-    print("masoud");
+
+    List<Task> test=await  Values.dataManager.getTodoDAO().queryAllRows();
     setState(()  {
-      widget.listTile=test;
+      //Provider.of<Val>(context).taskData.setTasks(test);
+      Provider.of<TaskData>(context).setTasks(test);
+     // widget.countOfTodos="Number of tasks: "+test.length.toString();
     });
+
+
+//    List<ListTile> test=await Values.dataManager.getTodoDAO().queryAllRows();
+//    print("masoud");
+//    setState(()  {
+//      widget.listTile=test;
+//      widget.countOfTodos="Number of tasks: "+test.length.toString();
+//    });
 
   }
 
@@ -99,7 +115,8 @@ class _TodoScreenState extends State<TodoScreen> {
                 ),
               ),
               Text(
-                "5 work to do",
+                //"${Provider.of<Val>(context).taskData.taskCount} ",
+                "Number of Tasks ${Provider.of<TaskData>(context).taskCount} ",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0
@@ -118,7 +135,7 @@ class _TodoScreenState extends State<TodoScreen> {
               topRight: Radius.circular(20.0)
             )
             ),
-            child: TaskList(list:  widget.listTile,),
+            child: TaskList(),
           ),
         )
       ],),
