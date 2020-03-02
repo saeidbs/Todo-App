@@ -11,6 +11,7 @@ class TodoTable {
 
     return "CREATE TABLE " + TABLE_NAME + "("
         + _ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+        + USER_COLUMN + " TEXT, "
         + TEXT_COLUMN + " TEXT "
         + ")";
   }

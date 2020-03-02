@@ -6,9 +6,11 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:todo_app/dataBase/dao/TodoDAO.dart';
+import 'package:todo_app/dataBase/dao/UserDAO.dart';
 import 'package:todo_app/dataBase/dataHelper/tables/TodoTable.dart';
+import 'package:todo_app/dataBase/dataHelper/tables/UserTable.dart';
 import 'package:todo_app/dataBase/dataManager/DataManager.dart';
-import 'package:todo_app/utility/Val.dart';
+
 
 class DataBaseHandler {
 
@@ -43,6 +45,12 @@ class DataBaseHandler {
   // SQL code to create the database table
   Future _onCreate(Database db, int version) async {
     await db.execute(TodoTable.getCreateTableString());
+    await db.execute(UserTable.getCreateTableString());
+    
+    await db.insert(UserTable.TABLE_NAME, {
+      UserTable.EMAIL_COLUMN:"saeid",
+      UserTable.PASSWORD_COLUMN:"saeid"
+    });
   }
 
 //

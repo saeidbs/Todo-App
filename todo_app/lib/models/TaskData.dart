@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/dataBase/dataHelper/tables/TodoTable.dart';
 import 'package:todo_app/dataBase/dataManager/DataManager.dart';
-import 'package:todo_app/utility/Val.dart';
+
 import 'package:todo_app/utility/Values.dart';
 
 import 'Task.dart';

@@ -3,7 +3,8 @@ import 'package:sqflite/sqflite.dart';
 import 'package:todo_app/dataBase/dataHelper/tables/TodoTable.dart';
 import 'package:todo_app/dataBase/dataManager/DataManager.dart';
 import 'package:todo_app/models/Task.dart';
-import 'package:todo_app/utility/Val.dart';
+import 'package:todo_app/utility/Values.dart';
+
 
 class TodoDAO{
    Database DB;
@@ -13,7 +14,8 @@ class TodoDAO{
   Future<int> add(String string) async{
 //    DB=await DataManager.dataManger.database;
 Map<String,String> map={
-TodoTable.TEXT_COLUMN:string
+TodoTable.TEXT_COLUMN:string,
+  TodoTable.USER_COLUMN:Values.logginUser.email
 };
 return await DB.insert(TodoTable.TABLE_NAME, map);
 }

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/add_task_screen.dart';
 import 'package:todo_app/dataBase/dataManager/DataManager.dart';
 import 'package:todo_app/models/Task.dart';
-import 'package:todo_app/utility/Val.dart';
+
 import 'package:todo_app/utility/Values.dart';
 import 'package:todo_app/widget/TaskList.dart';
 import 'package:todo_app/dataBase/DatabaseHelper.dart';

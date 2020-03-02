@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/dataBase/dataHelper/tables/TodoTable.dart';
 import 'package:todo_app/models/TaskData.dart';
-import 'package:todo_app/utility/Val.dart';
+
 import 'package:todo_app/widget/TaskTile.dart';
 
 

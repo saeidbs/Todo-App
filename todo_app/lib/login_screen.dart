@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/constants.dart';
 import 'package:todo_app/components/rounded_button.dart';
+import 'package:todo_app/models/User.dart';
 import 'package:todo_app/todo_screen.dart';
+import 'package:todo_app/utility/Values.dart';
 
 import 'dataBase/dataManager/DataManager.dart';
 
@@ -15,6 +17,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String email;
+  String passWord;
   @override
   void initState() {
     // TODO: implement initState
@@ -44,6 +48,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 textAlign: TextAlign.center,
                 decoration:
                     kTextFieldDecoration.copyWith(hintText: "Your email"),
+
+                onChanged: (text){
+                  email=text;
+                },
               ),
               SizedBox(
                 height: 8,
@@ -52,6 +60,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 decoration: kTextFieldDecoration.copyWith(hintText: "password"),
+                onChanged: (text){
+                  passWord=text;
+                },
               ),
               SizedBox(
                 height: 24,
@@ -59,17 +70,22 @@ class _LoginScreenState extends State<LoginScreen> {
               RoundedButton(
                 title: "login",
                 color: Colors.blueGrey,
-                onPressed: () {
-                  final snackBar= SnackBar(
-                    content: Text("Hellow"),
-                   action: SnackBarAction(
-                     label: "Undo",
-                      onPressed: ()=> print("Undo"),
-                   ),
-                  );
-                  Scaffold.of(RoundedButton.buildContext).showSnackBar(snackBar);
+                onPressed: () async {
+                String realPassword;
+                  realPassword=await Values.dataManager.getUserDAO().getPassword(email: email.trim());
 
-                  Navigator.pushNamed(context, TodoScreen.id);
+//                  final snackBar= SnackBar(
+//                    content: Text("Hellow"),
+//                   action: SnackBarAction(
+//                     label: "Undo",
+//                      onPressed: ()=> print("Undo"),
+//                   ),
+//                  );
+//                  Scaffold.of(RoundedButton.buildContext).showSnackBar(snackBar);
+                  if(realPassword==passWord) {
+                    Values.logginUser=User(email: email.trim(),password: passWord.trim());
+                    Navigator.pushNamed(context, TodoScreen.id);
+                  }
                 },
               )
             ],
