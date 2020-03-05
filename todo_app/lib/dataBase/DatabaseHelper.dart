@@ -51,6 +51,11 @@ class DataBaseHandler {
       UserTable.EMAIL_COLUMN:"saeid",
       UserTable.PASSWORD_COLUMN:"saeid"
     });
+
+    await db.insert(UserTable.TABLE_NAME, {
+      UserTable.EMAIL_COLUMN:"admin",
+      UserTable.PASSWORD_COLUMN:"admin"
+    });
   }
 
 //

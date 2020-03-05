@@ -1,39 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/constants.dart';
-import 'package:todo_app/components/rounded_button.dart';
 import 'package:todo_app/models/User.dart';
 import 'package:todo_app/todo_screen.dart';
 import 'package:todo_app/utility/Values.dart';
 
+import 'components/rounded_button.dart';
+import 'constants.dart';
 import 'dataBase/dataManager/DataManager.dart';
-
-class LoginScreen extends StatefulWidget {
-
-  static const String id = 'login_screen';
-
+class RegisterScreen extends StatefulWidget {
+  static const String id = 'register_screen';
   @override
-  _LoginScreenState createState() => _LoginScreenState();
-
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  String email;
-  String passWord;
-  @override
+class _RegisterScreenState extends State<RegisterScreen> {
+
+String email;
+String passWord;
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();
     test();
   }
-  Future test() async {
-    var test= await DataManager.createDateManager();
-  }
-
+Future test() async {
+  var test= await DataManager.createDateManager();
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
+        title: Text("Register"),
       ),
       backgroundColor: Colors.white,
       body: Padding(
@@ -47,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 decoration:
-                    kTextFieldDecoration.copyWith(hintText: "Your email"),
+                kTextFieldDecoration.copyWith(hintText: "Your email"),
 
                 onChanged: (text){
                   email=text;
@@ -57,7 +54,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 8,
               ),
               TextField(
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: true,
                 textAlign: TextAlign.center,
                 decoration: kTextFieldDecoration.copyWith(hintText: "password"),
                 onChanged: (text){
@@ -68,24 +66,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 24,
               ),
               RoundedButton(
-                title: "login",
+                title: "Register",
                 color: Colors.blueGrey,
                 onPressed: () async {
-                String realPassword;
-                  realPassword=(await Values.dataManager.getUserDAO().getPassword(email: email.trim())).trim();
 
-//                  final snackBar= SnackBar(
-//                    content: Text("Hellow"),
-//                   action: SnackBarAction(
-//                     label: "Undo",
-//                      onPressed: ()=> print("Undo"),
-//                   ),
-//                  );
-//                  Scaffold.of(RoundedButton.buildContext).showSnackBar(snackBar);
-                  if(realPassword==passWord) {
-                    Values.logginUser=User(email: email.trim(),password: passWord.trim());
-                    Navigator.pushNamed(context, TodoScreen.id);
-                  }
+                int saeid=await  Values.dataManager.getUserDAO().add(email: email.trim(),passWord: passWord.trim());
+                Values.logginUser=User(email: email.trim(),password: passWord.trim());
+                Navigator.pushNamed(context, TodoScreen.id);
+
+                print(saeid);
                 },
               )
             ],
@@ -95,3 +84,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+

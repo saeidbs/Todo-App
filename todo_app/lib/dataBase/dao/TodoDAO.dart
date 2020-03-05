@@ -20,14 +20,22 @@ TodoTable.TEXT_COLUMN:string,
 return await DB.insert(TodoTable.TABLE_NAME, map);
 }
 
-dynamic getTodo(){
- return DB.execute("Select * From "+TodoTable.TABLE_NAME);
-  
-}
+//dynamic getTodo(){
+// return DB.execute("Select * From "+TodoTable.TABLE_NAME);
+//
+//}
   Future<List<Task>> queryAllRows()  async {
 //    DB=await DataManager.dataManger.database;
 
-    List<Map<String, dynamic>> list= await DB.query(TodoTable.TABLE_NAME);
+   // List<Map<String, dynamic>> list= await DB.query(TodoTable.TABLE_NAME);
+
+
+    List<Map<String, dynamic>> list= await DB.rawQuery(
+        "SELECT ${TodoTable.TEXT_COLUMN}"+
+            " FROM ${TodoTable.TABLE_NAME}"+
+            " WHERE ${TodoTable.USER_COLUMN} = ?",
+        [Values.logginUser.email]
+    );
 
 
     List<Task> listTile=List<Task>();

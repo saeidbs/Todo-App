@@ -9,6 +9,7 @@ class UserDAO{
   UserDAO({this.DB});
 
   Future<int> add({String email,String passWord}) async{
+    email=email.trim();
 //    DB=await DataManager.dataManger.database;
     Map<String,String> map={
       UserTable.EMAIL_COLUMN:email,
@@ -18,11 +19,11 @@ class UserDAO{
   }
 
   Future<String> getPassword({String email}) async {
-
-    List<Map<String, dynamic>> listy= await DB.query(UserTable.TABLE_NAME);
-
-    print(listy[0][UserTable.EMAIL_COLUMN]);
-    print(email);
+//
+//    List<Map<String, dynamic>> listy= await DB.query(UserTable.TABLE_NAME);
+//
+//    print(listy[0][UserTable.EMAIL_COLUMN]);
+//    print(email);
     List<Map<String, dynamic>> list= await DB.rawQuery(
       "SELECT ${UserTable.PASSWORD_COLUMN}"+
         " FROM ${UserTable.TABLE_NAME}"+

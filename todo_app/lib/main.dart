@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/RegisterScreen.dart';
 import 'package:todo_app/dataBase/dataManager/DataManager.dart';
 import 'package:todo_app/models/TaskData.dart';
 
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         initialRoute: LoginScreen.id,
         routes: {
           TodoScreen.id:(context)=>TodoScreen(),
-          LoginScreen.id:(context)=>LoginScreen()
+          LoginScreen.id:(context)=>LoginScreen(),
+          RegisterScreen.id:(context)=>RegisterScreen()
         },
       ),
     );
