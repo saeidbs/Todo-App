@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    test();
+   // test();
   }
   Future test() async {
     var test= await DataManager.createDateManager();
@@ -59,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
               TextField(
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
+                obscureText: true,
                 decoration: kTextFieldDecoration.copyWith(hintText: "password"),
                 onChanged: (text){
                   passWord=text;

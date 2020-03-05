@@ -6,26 +6,29 @@ import 'package:todo_app/utility/Values.dart';
 import 'components/rounded_button.dart';
 import 'constants.dart';
 import 'dataBase/dataManager/DataManager.dart';
+
 class RegisterScreen extends StatefulWidget {
   static const String id = 'register_screen';
+
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  String email;
+  String passWord;
 
-String email;
-String passWord;
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    test();
+  //  test();
   }
-Future test() async {
-  var test= await DataManager.createDateManager();
-}
+
+  Future test() async {
+    var test = await DataManager.createDateManager();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,10 +47,9 @@ Future test() async {
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 decoration:
-                kTextFieldDecoration.copyWith(hintText: "Your email"),
-
-                onChanged: (text){
-                  email=text;
+                    kTextFieldDecoration.copyWith(hintText: "Your email"),
+                onChanged: (text) {
+                  email = text;
                 },
               ),
               SizedBox(
@@ -58,8 +60,8 @@ Future test() async {
                 obscureText: true,
                 textAlign: TextAlign.center,
                 decoration: kTextFieldDecoration.copyWith(hintText: "password"),
-                onChanged: (text){
-                  passWord=text;
+                onChanged: (text) {
+                  passWord = text;
                 },
               ),
               SizedBox(
@@ -69,12 +71,14 @@ Future test() async {
                 title: "Register",
                 color: Colors.blueGrey,
                 onPressed: () async {
+                  int saeid = await Values.dataManager
+                      .getUserDAO()
+                      .add(email: email.trim(), passWord: passWord.trim());
+                  Values.logginUser =
+                      User(email: email.trim(), password: passWord.trim());
+                  Navigator.pushNamed(context, TodoScreen.id);
 
-                int saeid=await  Values.dataManager.getUserDAO().add(email: email.trim(),passWord: passWord.trim());
-                Values.logginUser=User(email: email.trim(),password: passWord.trim());
-                Navigator.pushNamed(context, TodoScreen.id);
-
-                print(saeid);
+                  print(saeid);
                 },
               )
             ],
@@ -84,4 +88,3 @@ Future test() async {
     );
   }
 }
-
