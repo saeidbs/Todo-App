@@ -42,8 +42,14 @@ class TaskData extends ChangeNotifier {
   void updateToggleTask(Task task) {
     task.toggleDone();
 
-
+    int ischecked;
     //bayad database ham ezafe konam
+    if(task.isDone==true)
+      ischecked=1;
+    else
+      ischecked=0;
+
+    Values.dataManager.getTodoDAO().update(task.name, ischecked);
     notifyListeners();
   }
 

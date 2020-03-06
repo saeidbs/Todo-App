@@ -6,7 +6,7 @@ import 'package:todo_app/models/Task.dart';
 
 import 'package:todo_app/utility/Values.dart';
 import 'package:todo_app/widget/TaskList.dart';
-import 'package:todo_app/dataBase/DatabaseHelper.dart';
+import 'package:todo_app/dataBase/dataHelper/DatabaseHelper.dart';
 
 import 'dataBase/dataHelper/tables/TodoTable.dart';
 import 'models/TaskData.dart';

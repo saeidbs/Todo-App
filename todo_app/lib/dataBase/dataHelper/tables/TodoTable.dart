@@ -5,6 +5,7 @@ class TodoTable {
   static const String TABLE_NAME="todo";
   static const String USER_COLUMN="user_todo";
   static const String TEXT_COLUMN="text_todo";
+  static const String IS_CHECKED="checked_todo";
 
 
   static String getCreateTableString(){
@@ -12,7 +13,8 @@ class TodoTable {
     return "CREATE TABLE " + TABLE_NAME + "("
         + _ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT, "
         + USER_COLUMN + " TEXT, "
-        + TEXT_COLUMN + " TEXT "
+        + TEXT_COLUMN + " TEXT, "
+        + IS_CHECKED + " INTEGER"
         + ")";
   }
 
